@@ -2,8 +2,12 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.HashMap;
 import java.util.Scanner; // Import the Scanner class to read text files
-import java.util.ArrayList;
-
+//import java.util.ArrayList;
+/*
+* Nader Atef 20190575
+* Christina Montasser 20190382
+* Mirette Amin 20190570
+* */
 
 public class Main {
 	
@@ -18,11 +22,8 @@ public class Main {
     	        if (files[i].isFile()){ //this line weeds out other directories/folders
 					fileNames[i] = files[i].getName();
     		      Scanner myReader = new Scanner(files[i]);
-    		      //System.out.println(i);
-    		      //String data;
     		      while (myReader.hasNextLine()) {
     		    	 filesContent[i] = myReader.nextLine();
-    		      //System.out.println(data);
     		      }
     		      myReader.close();
     	        }
@@ -46,11 +47,9 @@ public class Main {
 					index.get(word).setpList(new Posting(1, fIndex));
 				}else{
 					index.get(word).setTerm_freq(index.get(word).getTerm_freq()+1);
-					Posting previous = null;
 					Posting current = index.get(word).getpList();
 					while (true){
 						if (current.getDocId() != fIndex){
-							previous = current;
 							if (current.next == null){
 								current.setNext(new Posting(1, fIndex));
 								break;
