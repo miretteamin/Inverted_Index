@@ -102,7 +102,7 @@ public class Main {
 		int docs[] = new int[k];
 
 		for (int i=0; i <k; i++){
-			int max_doc = -1;
+			int max_doc = -5;
 			double max_score = -2;
 			for (int n=0; n < N; n++){
 				if (scores[n] > max_score){
