@@ -1,1 +1,2 @@
-To be or not to be, that is the ultimate question in life.
+Hoe JavaScript te activeren in je web browser en waarom
+Cómo habilitar JavaScript en tu navegador y porqué hacerlo

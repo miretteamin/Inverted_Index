@@ -1,1 +1,2 @@
-He has a sweet tooth and loves anything sweet.
+Kako uključiti (omogućiti) JavaScript u web pregledniku
+Wie Sie JavaScript in Ihrem Browser einschalten und wofür es gebraucht wird
