@@ -1,9 +1,14 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner; // Import the Scanner class to read text files
-//import java.util.ArrayList;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import java.util.ArrayList;
 /*
 * Nader Atef 20190575
 * Christina Montasser 20190382
@@ -17,6 +22,7 @@ public class Main {
 	static String [] filesContent = new String[10];
 	static String [] fileNames = new String[10];
 	static int [] filesLength = new int[10];
+	static ArrayList<String> links;
 	static void read_files() {
 	    try {
     	 File path = new File(System.getProperty("user.dir")+"\\Documents");
@@ -36,9 +42,33 @@ public class Main {
 	      System.out.println("An error occurred.");
 	      e.printStackTrace();
 	    }
-	   //System.out.println(filesContent[0]);
 	  }
-    public static void main(String[] args) {
+	public void getPageLinks(String URL) {
+		//4. Check if you have already crawled the URLs
+		//(we are intentionally not checking for duplicate content in this example)
+		if (!links.contains(URL)) {
+			try {
+				//4. (i) If not add it to the index
+				if (links.add(URL)) {
+					System.out.println(URL);
+				}
+
+				//2. Fetch the HTML code
+				Document document = Jsoup.connect(URL).get();//jsoup jar to extract web data
+				//3. Parse the HTML to extract links to other URLs
+				Elements linksOnPage = document.select("a[href]");
+
+				//5. For each extracted URL... go back to Step 4.
+				for (Element page : linksOnPage) {
+					getPageLinks(page.attr("abs:href"));
+				}
+			} catch (IOException e) {
+				System.err.println("For '" + URL + "': " + e.getMessage());
+			}
+		}
+	}
+
+	public static void main(String[] args) {
 		int  k = 4;
 
 		read_files();
